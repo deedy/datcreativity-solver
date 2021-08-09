@@ -12,7 +12,8 @@ words = []
 # FILE = 'data/nouns-6k.txt'
 # FILE = 'data/nouns-sorted.txt' # too small
 # FILE = 'data/nounlist-large.txt' #7k
-FILE = 'data/corncob_lowercase.txt'
+# FILE = 'data/corncob_lowercase.txt'
+FILE = 'data/words-official.txt' # 71k
 # RESULTS = 'results.csv'
 BATCH_SIZE = 10
 ATTEMPTS = 1000
@@ -25,7 +26,7 @@ mutate_two = False
 # Switch this to false to make Simulated Annealing do a strict climb. Along with flag_select_lowest_row=True, this is pure greedy
 flag_pure_greedy = True
 k_max = 10000
-start_words = 'denudes, versification, condoles, tablespoons, gear, lyrics, published'
+start_words = 'resits, centralism, condoles, tablespoons, gear, lyrics, published'
 
 
 
