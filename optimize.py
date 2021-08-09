@@ -21,6 +21,8 @@ OUTPUT = 'anneal_105.csv'
 flag_select_lowest_row = True
 flag_select_custom_row = 3
 mutate_two = False	
+# Set this to '' to start from random
+start_words = 'initialising, beneficiaries, rebuffs, micron, gear, lyrics, finalist'
 
 with open(FILE, 'r') as f:
 	words = [x.strip() for x in f.read().split('\n')]
@@ -50,8 +52,6 @@ def parse(soup):
 def get_results(selection_inp):
 	selection = [s for s in selection_inp]
 	selection += ['xxx', 'xyz', 'yyy']
-	# print(selection)
-	# selection = ['apple', 'orange', 'guava', 'strawberry', 'raspberry', 'mango', 'cherry', 'candy', 'fruit', 'banana']
 	headers = {
 		'origin': 'https://www.datcreativity.com',
 		'referer': 'https://www.datcreativity.com/task'
@@ -120,7 +120,8 @@ def write_row(val, selection):
 
 selection = random.sample(words, 7)
 # Edit this or comment this out to start the optimization at this step
-selection = 'alerts, debut, cols, satrap, acres, soldering, relativists'.split(', ')
+if start_words:
+	selection = start_words.split(', ')
 res = get_results(selection)
 max_res = (res, selection)
 print_row(res, selection)

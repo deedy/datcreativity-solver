@@ -24,6 +24,10 @@ flag_select_lowest_row = True
 mutate_two = False	
 # Switch this to false to make Simulated Annealing do a strict climb. Along with flag_select_lowest_row=True, this is pure greedy
 flag_pure_greedy = True
+k_max = 10000
+if start_words:
+	selection = start_words.split(', ')
+start_words = 'initialising, beneficiaries, rebuffs, micron, gear, lyrics, finalist'
 
 
 
@@ -159,8 +163,8 @@ def write_row(val, selection):
 # 3000 - Score: 104.67	Percentile: 100.0	initialising, beneficiaries, rebuffs, micron, gear, lyrics, finalist
 
 selection = random.sample(words, 7)
-k_max = 10000
-selection = 'initialising, beneficiaries, rebuffs, micron, gear, lyrics, finalist'.split(', ')
+if start_words:
+	selection = start_words.split(', ')
 res = get_results(selection)
 print_row(res, selection)
 while res[0] == '0.0':
