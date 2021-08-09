@@ -8,11 +8,11 @@ import math
 words = []
 # '/usr/share/dict/words' leads to invalid results 
 # FILE = '/usr/share/dict/words' # mostly errors in spelling
-# FILE = 'nouns-91k.txt'
-# FILE = 'nouns-6k.txt'
-# FILE = 'nouns-sorted.txt' # too small
-# FILE = 'nounlist-large.txt' #7k
-FILE = 'corncob_lowercase.txt'
+# FILE = 'data/nouns-91k.txt'
+# FILE = 'data/nouns-6k.txt'
+# FILE = 'data/nouns-sorted.txt' # too small
+# FILE = 'data/nounlist-large.txt' #7k
+FILE = 'data/corncob_lowercase.txt'
 RESULTS = 'results.csv'
 BATCH_SIZE = 10
 ATTEMPTS = 1000

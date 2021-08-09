@@ -8,11 +8,11 @@ import math
 words = []
 # '/usr/share/dict/words' leads to invalid results 
 FILE = '/usr/share/dict/words' # mostly errors in spelling
-# FILE = 'nouns-91k.txt'
-# FILE = 'nouns-6k.txt'
-# FILE = 'nouns-sorted.txt' # too small
-# FILE = 'nounlist-large.txt' #7k
-FILE = 'corncob_lowercase.txt'
+# FILE = 'data/nouns-91k.txt'
+# FILE = 'data/nouns-6k.txt'
+# FILE = 'data/nouns-sorted.txt' # too small
+# FILE = 'data/nounlist-large.txt' #7k
+FILE = 'data/corncob_lowercase.txt'
 RESULTS = 'results.csv'
 BATCH_SIZE = 10
 ATTEMPTS = 1000
@@ -117,10 +117,15 @@ def write_row(val, selection):
 # Score: 105.49	Percentile: 100.0	alerts, debut, cols, satrap, campus, soldering, relativists
 # Score: 106.41	Percentile: 100.0	alerts, debut, cols, satrap, acres, soldering, relativists
 
-# Recently came across DAT creativity (https://www.datcreativity.com/), a divergence association test that aims to test creativity by trying to measure if 
-# people can come up with 7 words with as distinct meaning as possible. On my first human attempt, I scored a 92.18 (98.31%ile) with the words
-# queen, delta, proverb, benzene, potential, isthmus and snowboard. 
-# Of course, I quickly realized 
+Recently came across DAT creativity (https://www.datcreativity.com/) a test that tests creativity by seeing if 
+people can come up with the most dissimilar 7 words. The endpoint isn't protected,
+so I made a project of it and ended up with a 106.41. #datcreativity
+
+On my first human attempt, I scored a 92.18 (98.31%ile) with the words
+queen, delta, proverb, benzene, potential, isthmus and snowboard. 
+# Of course, after realizing the API was easily hit-able, I decided to work on getting the highest score, and ended up with a 106.41. At the
+# time of writing this, the highest recorded score is 109.5 [views, reference, inch, niff, partnered, absconds, jujube]. 
+# 
 
 
 selection = random.sample(words, 7)
