@@ -25,9 +25,7 @@ mutate_two = False
 # Switch this to false to make Simulated Annealing do a strict climb. Along with flag_select_lowest_row=True, this is pure greedy
 flag_pure_greedy = True
 k_max = 10000
-if start_words:
-	selection = start_words.split(', ')
-start_words = 'initialising, beneficiaries, rebuffs, micron, gear, lyrics, finalist'
+start_words = 'denudes, versification, condoles, tablespoons, gear, lyrics, published'
 
 
 
