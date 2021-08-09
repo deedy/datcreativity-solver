@@ -18,12 +18,16 @@ BATCH_SIZE = 10
 ATTEMPTS = 1000
 NUM_WORDS = 7
 OUTPUT = 'anneal_105.csv'
+flag_select_lowest_row = True
+flag_select_custom_row = 3
+mutate_two = False	
+
 with open(FILE, 'r') as f:
 	words = [x.strip() for x in f.read().split('\n')]
 
 
 words = [w for w in  words if w.lower() == w]
-# import pdb; pdb.set_trace()
+
 # Parsing
 PRECENTILE_REGEX = re.compile('higher than ([0-9\.]{,})%')
 def parse(soup):
@@ -69,10 +73,6 @@ def get_results(selection_inp):
 		val = ('0.0', errors, len(errors))
 	return val
 
-flag_select_lowest_row = True
-flag_select_custom_row = 3
-mutate_two = False	
-
 def get_neighbor(res, selection, new_word):
 	if flag_select_custom_row >= 0:
 		element = flag_select_custom_row
@@ -117,25 +117,17 @@ def write_row(val, selection):
 # Score: 105.49	Percentile: 100.0	alerts, debut, cols, satrap, campus, soldering, relativists
 # Score: 106.41	Percentile: 100.0	alerts, debut, cols, satrap, acres, soldering, relativists
 
-Recently came across DAT creativity (https://www.datcreativity.com/) a test that tests creativity by seeing if 
-people can come up with the most dissimilar 7 words. The endpoint isn't protected,
-so I made a project of it and ended up with a 106.41. #datcreativity
-
-On my first human attempt, I scored a 92.18 (98.31%ile) with the words
-queen, delta, proverb, benzene, potential, isthmus and snowboard. 
-# Of course, after realizing the API was easily hit-able, I decided to work on getting the highest score, and ended up with a 106.41. At the
-# time of writing this, the highest recorded score is 109.5 [views, reference, inch, niff, partnered, absconds, jujube]. 
-# 
-
 
 selection = random.sample(words, 7)
+# Edit this or comment this out to start the optimization at this step
 selection = 'alerts, debut, cols, satrap, acres, soldering, relativists'.split(', ')
 res = get_results(selection)
 max_res = (res, selection)
 print_row(res, selection)
 
+# Comment out to look at words at random
 # random.shuffle(words)
-for i, w in enumerate(words[16000:]):
+for i, w in enumerate(words):
 	new_selection = get_neighbor(res, selection, w)
 	new_res = get_results(new_selection)
 	print_row(new_res, new_selection)

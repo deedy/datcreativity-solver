@@ -13,17 +13,25 @@ words = []
 # FILE = 'data/nouns-sorted.txt' # too small
 # FILE = 'data/nounlist-large.txt' #7k
 FILE = 'data/corncob_lowercase.txt'
-RESULTS = 'results.csv'
+# RESULTS = 'results.csv'
 BATCH_SIZE = 10
 ATTEMPTS = 1000
 NUM_WORDS = 7
-OUTPUT = 'anneal_105.csv'
+OUTPUT = 'anneal.csv'
+# Mutate the word with the lowest score only
+flag_select_lowest_row = True
+# Mutate two words at a time instead of just one
+mutate_two = False	
+# Switch this to false to make Simulated Annealing do a strict climb. Along with flag_select_lowest_row=True, this is pure greedy
+flag_pure_greedy = True
+
+
+
 with open(FILE, 'r') as f:
 	words = [x.strip() for x in f.read().split('\n')]
 
 
 words = [w for w in  words if w.lower() == w]
-# import pdb; pdb.set_trace()
 # Parsing
 PRECENTILE_REGEX = re.compile('higher than ([0-9\.]{,})%')
 def parse(soup):
@@ -45,9 +53,9 @@ def parse(soup):
 
 def get_results(selection_inp):
 	selection = [s for s in selection_inp]
+	# Append 3 random misspelt words to make the API happy even though they're not counted towards the
+	# final score. Only the top 7 are. 
 	selection += ['xxx', 'xyz', 'yyy']
-	# print(selection)
-	# selection = ['apple', 'orange', 'guava', 'strawberry', 'raspberry', 'mango', 'cherry', 'candy', 'fruit', 'banana']
 	headers = {
 		'origin': 'https://www.datcreativity.com',
 		'referer': 'https://www.datcreativity.com/task'
@@ -68,10 +76,6 @@ def get_results(selection_inp):
 		print(str(len(errors)) + ' errors: ' + ','.join(selection))
 		val = ('0.0', errors, len(errors))
 	return val
-
-flag_select_lowest_row = True
-mutate_two = False	
-flag_pure_greedy = True
 
 def get_neighbor(res, selection):
 	if flag_select_lowest_row:
@@ -155,7 +159,7 @@ def write_row(val, selection):
 # 3000 - Score: 104.67	Percentile: 100.0	initialising, beneficiaries, rebuffs, micron, gear, lyrics, finalist
 
 selection = random.sample(words, 7)
-k_max = 1000
+k_max = 10000
 selection = 'initialising, beneficiaries, rebuffs, micron, gear, lyrics, finalist'.split(', ')
 res = get_results(selection)
 print_row(res, selection)

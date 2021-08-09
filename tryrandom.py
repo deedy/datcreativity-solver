@@ -4,13 +4,16 @@ import random
 import re
 import time
 
+# Best run achieved by O(1000s) of attempts at random from various word lists
+# 97.73,99.84,mistrials, touch, intake, terminator, piece, washtubs, comfort, xxx, xyz, yyy
+
 words = []
 # '/usr/share/dict/words' leads to invalid results 
 # FILE = '/usr/share/dict/words' # mostly errors in spelling
-FILE = 'nouns-91k.txt'
-FILE = 'nouns-6k.txt'
-# FILE = 'nouns-sorted.txt' # too small
-# FILE = 'nounlist-large.txt'
+FILE = 'data/nouns-91k.txt'
+FILE = 'data/nouns-6k.txt'
+# FILE = 'data/nouns-sorted.txt' # too small
+# FILE = 'data/nounlist-large.txt'
 RESULTS = 'results.csv'
 BATCH_SIZE = 10
 ATTEMPTS = 1000
@@ -20,7 +23,7 @@ with open(FILE, 'r') as f:
 
 
 words = [w for w in  words if w.lower() == w]
-# import pdb; pdb.set_trace()
+
 # Parsing
 PRECENTILE_REGEX = re.compile('higher than ([0-9\.]{,})%')
 def parse(soup):
